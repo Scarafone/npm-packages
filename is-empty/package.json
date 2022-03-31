@@ -1,0 +1,23 @@
+{
+  "name": "@scarafone/is-empty",
+  "version": "0.0.1",
+  "description": "Simple util for determining if an object is 'empty'",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scarafone/is-empty.git"
+  },
+  "keywords": [
+    "is",
+    "empty"
+  ],
+  "author": "Brent Scarafone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scarafone/is-empty/issues"
+  },
+  "homepage": "https://github.com/Scarafone/is-empty#readme"
+}
