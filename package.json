@@ -1,7 +1,7 @@
 {
-  "name": "@scarafone/is-empty",
-  "version": "0.0.1",
-  "description": "Simple util for determining if an object is 'empty'",
+  "name": "npm-packages",
+  "version": "1.0.0",
+  "description": "Collection on npm package",
   "main": "index.js",
   "scripts": {
     "test": "jest --config ./jest.config.json --coverage",
@@ -9,18 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Scarafone/npm-packages/is-empty"
+    "url": "git+https://github.com/Scarafone/npm-packages.git"
   },
-  "keywords": [
-    "is",
-    "empty"
-  ],
   "author": "Brent Scarafone",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Scarafone/npm-packages/issues"
   },
-  "homepage": "https://github.com/Scarafone/npm-packages/is-empty",
+  "homepage": "https://github.com/Scarafone/npm-packages#readme",
   "devDependencies": {
     "jest": "^27.5.1"
   }

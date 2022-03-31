@@ -1,0 +1,19 @@
+{
+  "name": "model-key-validator",
+  "version": "0.0.1",
+  "description": "Simple function for validating that our keys on our models match the expected pattern.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config ./jest.config.json --coverage",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Scarafone/npm-packages/model-key-validator"
+  },
+  "author": "Brent Scarafone",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
