@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Scarafone/npm-packages#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "keypather": "^3.1.0"
   }
 }
