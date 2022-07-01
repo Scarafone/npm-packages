@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config ./jest.config.json --coverage",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "jest --config ./jest.config.json --watch"
   },
   "repository": {
     "type": "git",
