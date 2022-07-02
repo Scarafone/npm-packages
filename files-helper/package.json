@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/files-helper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "File helper utility ",
   "main": "files-helper.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Scarafone/npm-packages/files-helper"
+    "url": "https://github.com/Scarafone/npm-packages/tree/main/files-helper"
   },
   "keywords": [
     "Files",

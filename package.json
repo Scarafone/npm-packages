@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config ./jest.config.json --coverage",
-    "test:watch": "jest --config ./jest.config.json --watch"
+    "test:watch": "jest --config ./jest.config.json --watch",
+    "publish": "echo run script to publish all packages in the directory"
   },
   "repository": {
     "type": "git",

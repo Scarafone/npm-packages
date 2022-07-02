@@ -9,7 +9,7 @@ The test cases should do a good job providing how the functions work if you need
 
 ```
 /// Import
-const { deleteFile, readFile, writeFile } from "@scarafone/files-helper"
+const { deleteFile, readFile, writeFile } = require("@scarafone/files-helper")
 
 /// Execution
 // Functions are synchronous
