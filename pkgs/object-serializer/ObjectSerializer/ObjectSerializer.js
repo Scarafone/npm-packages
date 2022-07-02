@@ -8,7 +8,7 @@ const isEmpty = require('@scarafone/is-empty/is-empty')
 	``` 
 
 	Example: {
-		'admin': ['*'],
+		'admin': [''],
 		'default': [
 			'permissions'
 		]
@@ -17,7 +17,7 @@ const isEmpty = require('@scarafone/is-empty/is-empty')
 	```
 * If there is no mapping provided or found in the fields it will use default
 * If default is not defined, then it will simply not return any fields, but you will
-* get an Ok
+* get an empty object
 */
 function ObjectSerializer(object, unserializableFields, typeKey = 'default') {
 	if (!unserializableFields) {
