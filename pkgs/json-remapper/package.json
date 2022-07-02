@@ -1,0 +1,21 @@
+{
+  "name": "@scarafone/json-remapper",
+  "version": "0.0.1",
+  "description": "Simple utility for remapping data based on a templated object",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scarafone/npm-packages/json-remapper"
+  },
+  "author": "Brent Scarafone",
+  "license": "MIT",
+  "dependencies": {
+    "keypather": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@scarafone/npx-base",
+  "version": "0.0.1",
+  "description": "A base project for building NPX based cli packages, could also be used for global packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config ./jest.config.json --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scarafone/npm-packages.git#main"
+  },
+  "keywords": [
+    "NPX",
+    "CLI",
+    "Nodejs"
+  ],
+  "author": "Brent Scarafone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Scarafone/npm-packages/issues"
+  },
+  "homepage": "https://github.com/Scarafone/npm-packages/tree/main#readme"
+}

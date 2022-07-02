@@ -1,0 +1,15 @@
+{
+  "name": "@scarafone/object-validator",
+  "version": "0.0.1",
+  "description": "Function for validating that a JS object has the required keys, otherwise return errors configured by user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brent Scarafone",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Scarafone/npm-packages/object-validator"
+  }
+}

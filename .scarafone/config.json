@@ -1,0 +1,14 @@
+{
+    "blacklist": [
+        "command-line-server",
+        "data-source-collector",
+        "files-helper",
+        "is-empty",
+        "json-local-database",
+        "json-remapper",
+        "model-key-validator",
+        "npx-base",
+        "object-serializer"
+    ],
+    "publish_version": "patch"
+}
