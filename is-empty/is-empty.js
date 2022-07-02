@@ -8,8 +8,8 @@
 
 
 module.exports = function IsEmpty(obj) {
+    if (obj == undefined) return true
     if (!obj) return true
-    if (obj === undefined) return true
     if (obj && obj.length <= 0) return true
     if(typeof obj === 'object') {
         const isEmpty = Object.keys(obj).length <= 0
