@@ -33,7 +33,7 @@ function deleteFile(filePath, shouldEnsurePathExists = false) {
 	if (shouldEnsurePathExists) {
 		ensureDirectoryExistence(filePath)
 	}
-  FS.unlinkSync(filePath)
+	FS.unlinkSync(filePath)
 }
 
 module.exports = {

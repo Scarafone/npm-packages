@@ -8,55 +8,55 @@ const { readFile, writeFile, deleteFile } = require('./files-helper')
 
 describe('Files Helper Test Suite', () => {
 
-    it('Should fail write when ensure is false and folder does not exist', async () => {
+    it('Should fail write when ensure is false and folder does not exist', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            const fatalResult = await writeFile(dummyLocation, JSON.stringify(dummyData), false) 
+            const fatalResult = writeFile(dummyLocation, false) 
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
     })
-    it('Should fail read when ensure is false and folder exists but file does not exist', async () => {
+    it('Should fail read when ensure is false and folder exists but file does not exist', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            const fatalResult = await readFile(dummyLocation, JSON.stringify(dummyData), false) 
+            const fatalResult = readFile(dummyLocation, false) 
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
     })
-    it('Should fail delete when ensure is false and folder exists but file does not exist', async () => {
+    it('Should fail delete when ensure is false and folder exists but file does not exist', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            const fatalResult = await readFile(dummyLocation, JSON.stringify(dummyData), false) 
+            const fatalResult = readFile(dummyLocation, false) 
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
     })
-    it('Should succeed when ensure is false and folder and file exist', async () => {
+    it('Should succeed when ensure is false and folder and file exist', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
             
-            await writeFile(dummyLocation, dummyData, true)
-            const successResult = await readFile(dummyLocation, JSON.stringify(dummyData), false)
+            writeFile(dummyLocation, dummyData, true)
+            const successResult = readFile(dummyLocation, false)
             expect(successResult).not.toBe(null)
 
-            await deleteFile(dummyLocation, true)
+            deleteFile(dummyLocation, true)
 
         } catch (err) {
             console.error(err)
         }
     })
-    it('Should succeed write when ensure is true and folder or file do not exist', async () => {
+    it('Should succeed write when ensure is true and folder or file do not exist', () => {
         try {
             const dummyLocation = "./test/imbed/test.json"
             const dummyData = { "key": "value" }
         
-            const successResult = await writeFile(dummyLocation, JSON.stringify(dummyData), true)
-            await deleteFile(dummyLocation)
+            const successResult = writeFile(dummyLocation, JSON.stringify(dummyData), true)
+            deleteFile(dummyLocation)
 
             expect(successResult).not.toBe(null)
 
@@ -65,13 +65,13 @@ describe('Files Helper Test Suite', () => {
             console.error(err)
         }
     })
-    it('Should succeed when deleting a file that exists', async () => {
+    it('Should succeed when deleting a file that exists', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
             
-            await writeFile(dummyLocation, dummyData, true)
-            const succeeded = await deleteFile(dummyLocation, true)
+            writeFile(dummyLocation, dummyData, true)
+            const succeeded = deleteFile(dummyLocation, true)
             expect(succeeded).not.toBe(false)
 
         } catch (err) {
