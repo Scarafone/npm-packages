@@ -15,5 +15,8 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "@scarafone/is-empty": "^0.0.1"
   }
 }

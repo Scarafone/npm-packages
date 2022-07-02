@@ -1,4 +1,4 @@
-const isEmpty = require('./../IsEmpty/IsEmpty')
+const isEmpty = require('@scarafone/is-empty/is-empty')
 
 /**
  * 
@@ -21,21 +21,22 @@ const isEmpty = require('./../IsEmpty/IsEmpty')
 */
 function ObjectSerializer(object, unserializableFields, typeKey = 'default') {
 	if (!unserializableFields) {
-        throw new Error('UnserializableFields is required')
-    }
+		throw new Error('UnserializableFields is required')
+	}
 	if (isEmpty(object)) {
 		return object
 	}
-    var toSerializeOut = unserializableFields[typeKey]
+	var toSerializeOut = unserializableFields[typeKey]
 	if (isEmpty(toSerializeOut)) {
 		toSerializeOut = unserializableFields['default']
 		if (isEmpty(toSerializeOut)) {
-			toSerializeOut = Object.keys(object)			
+			toSerializeOut = Object.keys(object)
 		}
 	}
-	toSerializeOut && toSerializeOut.forEach((field) => {
-		delete object[field]
-	})
+	toSerializeOut &&
+		toSerializeOut.forEach((field) => {
+			delete object[field]
+		})
 	return object
 }
 
