@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config ./jest.config.json --coverage",
     "test:watch": "jest --config ./jest.config.json --watch",
-    "publish": "echo run script to publish all packages in the directory"
+    "publish": "node ./scripts/publishing/publish-packages.js"
   },
   "repository": {
     "type": "git",
