@@ -1,0 +1,20 @@
+{
+  "name": "@scarafone/request",
+  "version": "0.0.1",
+  "description": "Wrapper utility functions around axios designed to provide convenience methods and handlers",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "Axios",
+    "request",
+    "rest",
+    "networking"
+  ],
+  "author": "Brent Scarafone",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}

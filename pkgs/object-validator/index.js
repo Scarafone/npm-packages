@@ -1,2 +1,1 @@
-import ObjectValidator from './ObjectValidator/ObjectValidator'
-export default ObjectValidator
+module.exports = ObjectValidator = require('./ObjectValidator/ObjectValidator')

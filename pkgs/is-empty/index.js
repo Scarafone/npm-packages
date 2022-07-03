@@ -1,0 +1,1 @@
+module.exports = isEmpty = require('./IsEmpty/is-empty')

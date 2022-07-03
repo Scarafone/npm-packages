@@ -1,2 +1,1 @@
-import Mapper from './Mapper/Mapper'
-export default Mapper
+module.exports = Mapper = require('./Mapper/Mapper')

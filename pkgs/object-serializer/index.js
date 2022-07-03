@@ -1,2 +1,1 @@
-import ObjectSerializer from './ObjectSerializer/ObjectSerializer'
-export default ObjectSerializer
+module.exports = ObjectSerializer = require('./ObjectSerializer/ObjectSerializer')

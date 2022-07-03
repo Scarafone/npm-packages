@@ -1,2 +1,1 @@
-import ModelKeyValidator from './ModelKeyValidator/ModelKeyValidator'
-export default ModelKeyValidator
+module.exports = ModelKeyValidator = require('./ModelKeyValidator/ModelKeyValidator')

@@ -1,0 +1,1 @@
+module.exports = { GETRequest, POSTRequest, DELETERequest, PATCHRequest } = require('./Request/request')
