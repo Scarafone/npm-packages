@@ -27,14 +27,14 @@ function DataSource(id, name, api_url, api_auth_token, pagination_map, object_ma
  * @param {*} dataSources Array of Data Source objects
  * @param {*} options An options object, currently only supports { separate_by_source: false }
  * Enabling separate by source will sort the data in a map and by key values by source
- * Data Source 
+ * Data Source so you can know where the results came from.
  * ```
     {
         id: 3,
         name: 'Ultra RPS Feed',
         api_url: "https://api.ultrarps.com/api/v2/posts/feed",
         api_auth_token: null,
-        pagination_map: { // Optional, unless used then // { 'Required Keys' : 'Their Keys' }
+        pagination_map: { // Optional, if used then // { 'Required Keys' : 'Their Keys' }
             next: 'next',  // `next` is a required key
             results: 'results' // `results` is a required key
         },
@@ -74,14 +74,9 @@ async function getDataFromSources (dataSources, options = null) {
 }
 
 async function postDataToSources (dataSources, options = null) {
-    printVerbosely(options, "This is a test log")
+    console.log(options, "This is a test log")
 }
 
-function printVerbosely(options, ...[message]) {
-    if (options.verbose) {
-        console.log(message)
-    }
-}
 
 /**
  * This function takes in a map of objects and given a supported formatting style
@@ -154,6 +149,7 @@ async function processResponseFromSource(response, source, options = null) {
 }
 
 module.exports = {
+    DataSource,
     getDataFromSources,
     postDataToSources,
 }
