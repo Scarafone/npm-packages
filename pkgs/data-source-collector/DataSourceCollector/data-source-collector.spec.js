@@ -22,7 +22,8 @@ describe('Data Source Collector Suite', () => {
         expect(dataSource).toStrictEqual({"api_auth_token": "JWT TokenHere", "api_url": "https://0.0.0.0", "id": "DS-1", "name": "Test Data Source", "object_map": null, "pagination_map": {"next": "next_page", "results": "objects"}})
 	})
 
-    it('Should', () => {
-        6
+    it('Should fetch data', () => {
+        
+		
     })
 })
