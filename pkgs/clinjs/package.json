@@ -1,0 +1,17 @@
+{
+  "name": "@scarafone/clinjs",
+  "version": "0.0.1",
+  "description": "Command line interface for Node JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "CLI",
+    "NodeJS",
+    "Command",
+    "Line"
+  ],
+  "author": "Brent Scarafone",
+  "license": "MIT"
+}
