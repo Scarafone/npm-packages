@@ -10,11 +10,7 @@ function ensureDirectoryExistence(filePath) {
 	return FS.mkdirSync(dirname)
 }
 
-function readFile(filePath, shouldEnsurePathExists = false) {
-	if (shouldEnsurePathExists) {
-		ensureDirectoryExistence(filePath)
-	}
-
+function readFile(filePath) {
 	const buffer = FS.readFileSync(filePath, {
 		encoding: 'utf8',
 		flag: 'r',
@@ -29,16 +25,18 @@ function writeFile(filePath, data, shouldEnsurePathExists = false) {
 	FS.writeFileSync(filePath, JSON.stringify(data))
 }
 
-function deleteFile(filePath, shouldEnsurePathExists = false) {
-	if (shouldEnsurePathExists) {
-		ensureDirectoryExistence(filePath)
-	}
+function deleteFile(filePath) {
 	FS.unlinkSync(filePath)
+}
+
+function deleteDirectory(directoryPath, recursive = false) {
+	FS.rmdirSync(directoryPath, { recursive })
 }
 
 module.exports = {
 	closeFile: FS.closeSync,
 	deleteFile,
+	deleteDirectory,
 	readFile,
 	writeFile,
 }

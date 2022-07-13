@@ -5,7 +5,7 @@
 const { getDataFromSources, postDataToSources } = require('../pkgs/data-source-collector')
 const { closeFile, deleteFile, readFile, writeFile } = require('../pkgs/files-helper')
 const isEmpty = require('../pkgs/is-empty')
-const Mapper = require('../pkgs/json-remapper')
+const { Mapper, serializeObjFromMap, getValueFromObjectForKeyPath } = require('../pkgs/json-remapper')
 const ModelKeyValidator = require('../pkgs/model-key-validator')
 const ObjectSerializer = require('../pkgs/object-serializer')
 const { ObjectKeyErrorMap, validateObject } = require('../pkgs/object-validator')
@@ -31,6 +31,9 @@ describe('Global Project Test Suite - Import Suite', () => {
 
     it('Should allow import of mapper package from index as functions', () => {
         expect(typeof Mapper).toBe("function")
+        expect(typeof serializeObjFromMap).toBe("function")
+        expect(typeof getValueFromObjectForKeyPath).toBe("function")
+          
     })
 
     it('Should allow import of model-key-validator package from index as functions', () => {
