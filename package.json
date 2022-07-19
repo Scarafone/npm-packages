@@ -23,6 +23,13 @@
     "jest-mock-axios": "^4.6.1"
   },
   "dependencies": {
+    "@scarafone/files-helper": "^0.0.3",
+    "@scarafone/is-empty": "^0.0.1",
+    "@scarafone/json-remapper": "^0.0.2",
+    "@scarafone/model-key-validator": "^0.0.1",
+    "@scarafone/object-serializer": "^0.0.1",
+    "@scarafone/object-validator": "^0.0.1",
+    "@scarafone/request": "^0.0.1",
     "keypather": "^1.10.1"
   }
 }
