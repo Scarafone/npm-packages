@@ -1,10 +1,10 @@
 /**
  * DataSourceCollector Test Suite
  */
-const mockAxios = require('jest-mock-axios').default
+// const mockAxios = require('jest-mock-axios').default
 const { DataSource, getDataFromSources, postDataToSources } = require('./data-source-collector')
 
-console.log("mock", mockAxios)
+// console.log("mock", mockAxios)
 
 
 describe('Data Source Collector Suite', () => {
@@ -69,6 +69,33 @@ describe('Data Source Collector Suite', () => {
 			entry_score: 38001,
 			old_school_id: "B.S"
 		})
+	})
+
+	it('Should return null if no data sources are passed in', async () => {
+		const result = await getDataFromSources(null)
+		expect(result).toStrictEqual(null)
+	})
+
+	it('Should throw error if invalid URL is passed', async () => {
+		const source = {
+			id: 3,
+			name: 'Leader Boards',
+			api_url: '/api/v1/rps/leader-boards?page_size=3',
+			api_auth_token: null,
+			pagination_map: {
+				next: 'next', // `next` is a required key
+				results: 'results', // `results` is a required key
+			},
+			object_map: null,
+		}
+		try {
+			await getDataFromSources([source], { separate_by_source: true })
+		} catch (err) {
+			console.log("Err", err)
+			expect(err).not.toStrictEqual(null)
+			expect(err.message).toBe("")
+		}
+		
 	})
 
 })
