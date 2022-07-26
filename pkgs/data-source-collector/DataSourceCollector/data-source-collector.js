@@ -114,9 +114,6 @@ async function processResponseFromSource(response, source, options = null) {
         let results = pageControl.results
         while (nextDataSource) {
             try {
-                if (options && options.verbose) {
-                    console.info(`Fetching next: ${nextDataSource}`)
-                }
                 const result = await GETRequest(nextDataSource, { "Authorization": `${source.api_auth_token}` })
                 let resultControl = new Mapper([result], source.pagination_map, options)[0]
                 if (resultControl.results) {
@@ -125,9 +122,6 @@ async function processResponseFromSource(response, source, options = null) {
                 nextDataSource = resultControl.next
             } catch (err) {
                 nextDataSource = null
-                if (options && options.verbose) {
-                    console.error('Internal Request Error: ', err)
-                }
                 throw err
             }
         }
