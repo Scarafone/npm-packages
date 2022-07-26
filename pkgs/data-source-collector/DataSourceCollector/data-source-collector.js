@@ -53,9 +53,6 @@ async function getDataFromSources (dataSources, options = null) {
     let responses = {}
     for (let index in dataSources) {
         const source = dataSources[index]
-        if (options && options.verbose) {
-            console.info("Fetching from source: ", source.api_url)
-        }
         try {
             const response = await GETRequest(source.api_url,  { "Authorization": `${source.api_auth_token}` })
             const results = await processResponseFromSource(response, source, options)
@@ -63,9 +60,6 @@ async function getDataFromSources (dataSources, options = null) {
                 responses[source.id] = results
             }
         } catch (err) {
-            if (options && options.verbose) {
-                console.error('Error', err)
-            }
             throw err
         }
     }
@@ -74,7 +68,7 @@ async function getDataFromSources (dataSources, options = null) {
 }
 
 async function postDataToSources (dataSources, options = null) {
-    console.log(options, "This is a test log")
+    return true
 }
 
 

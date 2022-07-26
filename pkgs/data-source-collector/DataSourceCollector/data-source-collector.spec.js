@@ -4,9 +4,6 @@
 const { mockAxios } = require('jest-mock-axios')
 const { DataSource, getDataFromSources, postDataToSources } = require('./data-source-collector')
 
-console.log(mockAxios)
-
-
 describe('Data Source Collector Suite', () => {
 
 	it('Should create a data source object', () => {
