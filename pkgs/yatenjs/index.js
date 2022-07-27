@@ -1,1 +1,1 @@
-module.exports = YATE = require('./yate/index')
+module.exports = YATE = require('./YateNJS/index')
