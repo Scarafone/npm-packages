@@ -13,6 +13,7 @@
   "author": "Brent Scarafone",
   "license": "MIT",
   "dependencies": {
+    "@scarafone/files-helper": "^0.0.3",
     "yargs": "^17.5.1"
   }
 }
