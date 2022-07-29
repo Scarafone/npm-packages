@@ -2,7 +2,7 @@
 
 // Yet another template engine
 
-const { writeFile, readFile, closeFile, deleteFile } = require('@scarafone/files-helper')
+const { writeFile, readFile, closeFile, deleteFile, ensureDirectoryExistence } = require('@scarafone/files-helper')
 const path = require('path')
 const fs = require('fs')
 
@@ -25,9 +25,6 @@ const { string } = require('yargs')
 const argv = yargs(hideBin(process.argv))
 	.command(['create [template] [fileLocation]', 'make'], 'Execute a template blueprint. You can pass an optional json string object to pass additional custom options to the blueprint. \n\nWill make the file and folder if it does not already exists.', {}, (argv) => {
 		console.log('Executing blueprint for template', argv.template || 'default', 'app')
-
-
-
 	})
 	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location', {}, (argv) => {
 		async function test() {
@@ -50,6 +47,7 @@ const argv = yargs(hideBin(process.argv))
 						Object.keys(part).forEach((key) => {
 							template = part[key]
 							const writeDir = `${config.templates_dir}/${key}.js`
+                            ensureDirectoryExistence(writeDir)
 							let stream = fs.createWriteStream(writeDir, {
 								flags: 'w',
 							})
