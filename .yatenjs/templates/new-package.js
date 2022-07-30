@@ -15,13 +15,8 @@
  * template takes.
  */
 function TBlueprint(options) {
-
-    console.log({
-        options
-    })
-
 	const getJESTConfig = (options) => `{
-"testRegex": "((\\.|/*.)(spec))\\.js?$",
+"testRegex": "((\/\.|/*.)(spec))\/\.js?$",
 "collectCoverage": true,
 "coverageReporters": [
     "json",
@@ -52,7 +47,7 @@ function TBlueprint(options) {
 }
 `
 
-    const getObjectJS = (options) => `
+	const getObjectJS = (options) => `
 /**
  * ${options.name}
  * 
@@ -63,27 +58,26 @@ function ${options.name}() {}
 module.exports = ${options.name}
     `
 
-    const getObjectJSSpec = (options) => `
+	const getObjectJSSpec = (options) => `
 const ${options.name} = require('./${options.name}')
 
 describe('${options.name} Suite', () => {
 	it('should import ${options.name} as function', () => {
-		expect(typeof ObjectSerializer).toBe('function')
+		expect(typeof ${options.name}).toBe('function')
 	})
 })
     `
 
-    const getIndex = (options) => `module.exports = ${options.name} = require('./${options.name}/${options.name}')`
+	const getIndex = (options) => `module.exports = ${options.name} = require('./${options.name}/${options.name}')`
 
 	return {
 		parts: [
-            { [`${options.name}/jest.config.json`]: getJESTConfig(options) },
-            { [`${options.name}/package.json`]: getPackageJSON(options) },
-            { [`${options.name}/index.js`]: getIndex(options) },
-            { [`${options.name}/${options.name}.js`]: getObjectJS(options) },
-            { [`${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) }
-        
-        ],
+			{ [`${options.name}/jest.config.json`]: getJESTConfig(options) },
+			{ [`${options.name}/package.json`]: getPackageJSON(options) },
+			{ [`${options.name}/index.js`]: getIndex(options) },
+			{ [`${options.name}/${options.name}/${options.name}.js`]: getObjectJS(options) },
+			{ [`${options.name}/${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) },
+		],
 	}
 }
 module.exports = TBlueprint
