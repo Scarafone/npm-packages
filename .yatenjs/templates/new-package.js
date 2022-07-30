@@ -77,9 +77,9 @@ describe('${options.name} Suite', () => {
 
 	return {
 		parts: [
-            { 'jest.config.json': getJESTConfig(options) },
-            { 'package.json': getPackageJSON(options) },
-            { 'index.js': getIndex(options) },
+            { [`${options.name}/jest.config.json`]: getJESTConfig(options) },
+            { [`${options.name}/package.json`]: getPackageJSON(options) },
+            { [`${options.name}/index.js`]: getIndex(options) },
             { [`${options.name}/${options.name}.js`]: getObjectJS(options) },
             { [`${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) }
         

@@ -1,10 +1,6 @@
 const ObjectSerializer = require('./ObjectSerializer')
 
 describe('Object Serializer Suite', () => {
-	it('Should be your first test!', () => {
-		expect(typeof ObjectSerializer).toBe('function')
-	})
-})
 
 
 	const unserializableFieldsExample = {
