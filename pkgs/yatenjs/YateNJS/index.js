@@ -5,13 +5,10 @@
 const { writeFile, readFile, closeFile, deleteFile, ensureDirectoryExistence } = require('@scarafone/files-helper')
 const path = require('path')
 const fs = require('fs')
-
-const copyrightYear = '2022'
-
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
-const { string } = require('yargs')
 
+const copyrightYear = '2022'
 /**
  * TODO
  * - Test if package has proper configs for command
@@ -22,11 +19,74 @@ const { string } = require('yargs')
  *  - Read contents and create
  */
 
-const argv = yargs(hideBin(process.argv))
-	.command(['create [template] [fileLocation]', 'make'], 'Execute a template blueprint. You can pass an optional json string object to pass additional custom options to the blueprint. \n\nWill make the file and folder if it does not already exists.', {}, (argv) => {
-		console.log('Executing blueprint for template', argv.template || 'default', 'app')
+function renderBlueprint(blueprint, config) {
+	blueprint.parts.forEach((part) => {
+		// const part = blueprint.parts[key]
+		Object.keys(part).forEach((key) => {
+			template = part[key]
+			const writeDir = `${config.templates_dir}/${key}`
+			ensureDirectoryExistence(writeDir)
+			let stream = fs.createWriteStream(writeDir, {
+				flags: 'w',
+			})
+			stream.write(template)
+			stream.end()
+		})
 	})
-	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location', {}, (argv) => {
+}
+
+const argv = yargs(hideBin(process.argv))
+	.command(['init'], 'Initialize use of the application and create a config folder in the root directory of the executed directory\n', {}, async (argv) => {
+		process.stdout.write('Initialize Application YateNJS')
+		const curDirectory = process.cwd()
+		try {
+			// Test for config
+			readFile(`${curDirectory + '/.yatenjs/config.json'}`)
+		} catch (directoryErr) {
+			process.stdout.write('Directory not found, we will now create the directory and set up some default files\n')
+			await ensureDirectoryExistence(`${curDirectory + '/.yatenjs/'}`)
+			const yateConfigBlueprint = require('./InternalTemplates/YateConfigTemplate')()
+			await renderBlueprint(yateConfigBlueprint, { templates_dir: './.yatenjs/' })
+			process.stdout.write('Created config file\n')
+			const config = JSON.parse(yateConfigBlueprint.parts[0]["config.json"])
+			const templateBlueprint = require('./InternalTemplates/TBlueprintTemplate')()
+			renderBlueprint(templateBlueprint, config)
+			process.stdout.write('Created default sample template\n')
+		}
+		// TODO: Test if application directory already exists
+		// TODO: Create application directory
+		// TODO: Test if config json is present
+		// TODO: Create config json
+		// TODO: Test if templates folder exists?
+		// TODO: Create initial blueprint
+		process.stdout.write('Operation complete')
+	})
+	.command(
+		['create [template] [directory] [options]', 'make'],
+		'Create a new file from a named blueprint template at the specified directory.\n\nYou can pass an optional json string object to pass additional custom options to the blueprint. \n\nWill create the directory if it does not already exists.\n',
+		{},
+		(argv) => {
+			console.log({
+				"Required params": argv,
+				"template": argv.template,
+				"directory": argv.directory,
+				"options": argv.options && JSON.parse(argv.options)
+			})
+			try {
+				const curDirectory = process.cwd()
+				const config = require(`${curDirectory + '/.yatenjs/config.json'}`)
+				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...argv.options && JSON.parse(argv.options) })
+				renderBlueprint(blueprint, { templates_dir: argv.directory })
+				console.log({
+					blueprint
+				})
+			} catch (templateErr) {
+				console.log("Error", templateErr.message)
+				throw templateErr
+			}
+		}
+	)
+	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location\n', {}, (argv) => {
 		async function test() {
 			console.log('Generating new template boilerplate with name', argv.name || 'default', 'app')
 
@@ -39,29 +99,15 @@ const argv = yargs(hideBin(process.argv))
 				}
 
 				try {
-					const blueprint = require('./InternalTemplates/template')({ argv })
+					const blueprint = require('./InternalTemplates/TBlueprintTemplate')({ argv })
 					// For each part we want take the action
-					// console.log({blueprint: blueprint.parts})
-					blueprint.parts.forEach((part) => {
-						// const part = blueprint.parts[key]
-						Object.keys(part).forEach((key) => {
-							template = part[key]
-							const writeDir = `${config.templates_dir}/${key}.js`
-                            ensureDirectoryExistence(writeDir)
-							let stream = fs.createWriteStream(writeDir, {
-								flags: 'w',
-							})
-							stream.write(template)
-							stream.end()
-						})
-					})
+					renderBlueprint(blueprint, config)
 				} catch (blueprintErr) {
-					console.log({
-						blueprintErr,
-					})
+					throw new Error(blueprintErr.message)
 				}
 			} catch (configErr) {
-				throw new Error(configErr.message)
+				console.info('Configuration file not found. Please run `yatenjs init` or `yatenjs --help` for more information.')
+				// throw new Error(configErr.message)
 			}
 		}
 		test()
@@ -70,7 +116,7 @@ const argv = yargs(hideBin(process.argv))
 	.epilog(`copyright © ${copyrightYear}`).argv
 // console.log({ argv })
 
-if (Object.keys(argv._).length <= 0) {
+if (argv && argv._ && Object.keys(argv._).length <= 0) {
 	process.stdout.write('\nYet Another Template Engine')
 	process.stdout.write('\nUsage: yatensjs --help')
 } else {
