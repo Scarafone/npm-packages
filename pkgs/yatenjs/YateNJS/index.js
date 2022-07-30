@@ -66,30 +66,19 @@ const argv = yargs(hideBin(process.argv))
 		'Create a new file from a named blueprint template at the specified directory.\n\nYou can pass an optional json string object to pass additional custom options to the blueprint. \n\nWill create the directory if it does not already exists.\n',
 		{},
 		(argv) => {
-			console.log({
-				"Required params": argv,
-				"template": argv.template,
-				"directory": argv.directory,
-				"options": argv.options && JSON.parse(argv.options)
-			})
 			try {
 				const curDirectory = process.cwd()
 				const config = require(`${curDirectory + '/.yatenjs/config.json'}`)
 				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...argv.options && JSON.parse(argv.options) })
 				renderBlueprint(blueprint, { templates_dir: argv.directory })
-				console.log({
-					blueprint
-				})
 			} catch (templateErr) {
-				console.log("Error", templateErr.message)
+				process.stdout.write("Error", templateErr.message + "\n") 
 				throw templateErr
 			}
 		}
 	)
 	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location\n', {}, (argv) => {
 		async function test() {
-			console.log('Generating new template boilerplate with name', argv.name || 'default', 'app')
-
 			// Test if we can find the config in the root of the repo the command was run from
 			try {
 				const curDirectory = process.cwd()
@@ -106,7 +95,7 @@ const argv = yargs(hideBin(process.argv))
 					throw new Error(blueprintErr.message)
 				}
 			} catch (configErr) {
-				console.info('Configuration file not found. Please run `yatenjs init` or `yatenjs --help` for more information.')
+				process.stdout.write('Configuration file not found. Please run `yatenjs init` or `yatenjs --help` for more information.\n')
 				// throw new Error(configErr.message)
 			}
 		}
@@ -114,11 +103,9 @@ const argv = yargs(hideBin(process.argv))
 	})
 	.usage('Usage: YateNJS <command> [options]')
 	.epilog(`copyright © ${copyrightYear}`).argv
-// console.log({ argv })
+
 
 if (argv && argv._ && Object.keys(argv._).length <= 0) {
 	process.stdout.write('\nYet Another Template Engine')
 	process.stdout.write('\nUsage: yatensjs --help')
-} else {
-	// console.log({argv})
 }
