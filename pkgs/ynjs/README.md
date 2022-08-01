@@ -25,7 +25,7 @@ Long story short, like all good things it's important to know how to do somethin
 The recommend way to configure the utility is to provide a configuration JSON object. 
 You may create a configuration folder and the application will automatically read from this location first.  
 
-Folder: `./.yatenjs/config.json`
+Folder: `./.ynjs/config.json`
 
 This folder should be located at the root of your directory. 
 
@@ -55,9 +55,9 @@ It is also possible to use flags and pass the information through the command li
 ```
 // TODO: Add Command Example
 
-$ node .\YateNJS\index.js create thing "./.yatenjs/templates/" --templates="./.yatenjs/templates" --config="./.yatenjs/config.json"
+$ node .\ynjs\index.js create thing "./.ynjs/templates/" --templates="./.ynjs/templates" --config="./.ynjs/config.json"
 
-$ node .\YateNJS\index.js template lib-component "./.yatenjs/templates/" --templates="./.yatenjs/templates" --config="./.yatenjs/config.json"
+$ node .\ynjs\index.js template lib-component "./.ynjs/templates/" --templates="./.ynjs/templates" --config="./.ynjs/config.json"
 
 ```
 
@@ -73,7 +73,7 @@ If multiple locations are possible for configuration the utility will always rea
 
 1. Config location passed in `--config="//file/location/config.json"`
 2. Explicit command line arguments 
-3. Project File `./.yatenjs/config.json`
+3. Project File `./.ynjs/config.json`
 
 If the requirements of the program can not satisfied by one of these requirements then it will exit and return `0`. 
 
@@ -90,7 +90,7 @@ The idea is to provide a simple interface along with a straightforward way of se
     - Create is used to tell the system based on your configuration file
 
 ```
-yatenjs create 
+ynjs create 
 
 ```
 
