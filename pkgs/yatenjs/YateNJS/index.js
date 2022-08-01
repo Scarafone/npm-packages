@@ -2,7 +2,7 @@
 
 // Yet another template engine
 
-const { writeFile, readFile, closeFile, deleteFile, ensureDirectoryExistence } = require('@scarafone/files-helper')
+const { ensureDirectoryExistence, readFile } = require('@scarafone/files-helper')
 const path = require('path')
 const fs = require('fs')
 const yargs = require('yargs')
@@ -102,7 +102,8 @@ const argv = yargs(hideBin(process.argv))
 		test()
 	})
 	.usage('Usage: YateNJS <command> [options]')
-	.epilog(`copyright © ${copyrightYear}`).argv
+	.epilog(`copyright © ${copyrightYear}`)
+	.argv
 
 
 if (argv && argv._ && Object.keys(argv._).length <= 0) {

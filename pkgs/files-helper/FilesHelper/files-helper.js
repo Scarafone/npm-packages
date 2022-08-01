@@ -36,6 +36,7 @@ function deleteDirectory(directoryPath, recursive = false) {
 module.exports = {
 	closeFile: FS.closeSync,
 	deleteFile,
+	ensureDirectoryExistence,
 	deleteDirectory,
 	readFile,
 	writeFile,
