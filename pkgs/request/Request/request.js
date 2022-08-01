@@ -4,7 +4,7 @@ const Axios = require('axios')
  * @param {*} url String representation of an http(s) valid URL address
  * @param {*} headers Object of any additional headers required to be sent with request
  */
-async function GETRequest(url, headers, options = null) {
+async function GETRequest(url, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
 		const results = await Axios.get(url, {
 			headers: headers,
@@ -12,14 +12,23 @@ async function GETRequest(url, headers, options = null) {
 		const data = results.data
 		return data
 	} catch (err) {
-		console.error('Error', err)
-		if (options && options.verbose) {
+		if (options) {
+			if (options.verbose) console.error('Error', err)
+			if (options.shouldThrowError) throw err
 		}
 		return []
 	}
 }
 
-async function POSTRequest(url, body, headers, options = null) {
+/**
+ * 
+ * @param {*} url 
+ * @param {*} body 
+ * @param {*} headers 
+ * @param {*} options 
+ * @returns 
+ */
+async function POSTRequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
 		const results = await Axios.post(url, body, {
 			headers: headers,
@@ -27,11 +36,23 @@ async function POSTRequest(url, body, headers, options = null) {
 		const data = results.data
 		return data
 	} catch (err) {
+		if (options) {
+			if (options.verbose) console.error('Error', err)
+			if (options.shouldThrowError) throw err
+		}
 		throw err.response.data.error
 	}
 }
 
-async function PATCHRequest(url, body, headers, options = null) {
+/**
+ * 
+ * @param {*} url 
+ * @param {*} body 
+ * @param {*} headers 
+ * @param {*} options 
+ * @returns 
+ */
+async function PATCHRequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
 		const results = await Axios.patch(url, body, {
 			headers: headers,
@@ -39,23 +60,34 @@ async function PATCHRequest(url, body, headers, options = null) {
 		const data = results.data
 		return data
 	} catch (err) {
-		if (options && options.verbose) {
-			console.error('Error', err)
+		if (options) {
+			if (options.verbose) console.error('Error', err)
+			if (options.shouldThrowError) throw err
 		}
 		return []
 	}
 }
 
-async function DELETERequest(url, body, headers, options = null) {
+/**
+ * 
+ * @param {*} url 
+ * @param {*} body 
+ * @param {*} headers 
+ * @param {*} options 
+ * @returns 
+ */
+async function DELETERequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
 		const results = await Axios.delete(url, {
 			headers: headers,
+			body: body,
 		})
 		const data = results.data
 		return data
 	} catch (err) {
-		if (options && options.verbose) {
-			console.error('Error', err)
+		if (options) {
+			if (options.verbose) console.error('Error', err)
+			if (options.shouldThrowError) throw err
 		}
 		return []
 	}
