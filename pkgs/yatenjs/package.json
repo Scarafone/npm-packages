@@ -13,7 +13,7 @@
   "author": "Brent Scarafone",
   "license": "MIT",
   "dependencies": {
-    "@scarafone/files-helper": "^0.0.3",
+    "@scarafone/files-helper": "^0.0.4",
     "yargs": "^17.5.1"
   },
   "bin": "YateNJS/index.js"
