@@ -18,7 +18,7 @@
 function TBlueprint(options) {
 
     const getTemplate = (options) => `{
-    "templates_dir": "./.yatenjs/templates"
+    "templates_dir": "./.ynjs/templates"
 }`
 
     return {

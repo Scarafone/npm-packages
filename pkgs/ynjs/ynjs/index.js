@@ -37,16 +37,16 @@ function renderBlueprint(blueprint, config) {
 
 const argv = yargs(hideBin(process.argv))
 	.command(['init'], 'Initialize use of the application and create a config folder in the root directory of the executed directory\n', {}, async (argv) => {
-		process.stdout.write('Initialize Application YateNJS')
+		process.stdout.write('Initialize Application Ynjs')
 		const curDirectory = process.cwd()
 		try {
 			// Test for config
-			readFile(`${curDirectory + '/.yatenjs/config.json'}`)
+			readFile(`${curDirectory + '/.ynjs/config.json'}`)
 		} catch (directoryErr) {
 			process.stdout.write('Directory not found, we will now create the directory and set up some default files\n')
-			await ensureDirectoryExistence(`${curDirectory + '/.yatenjs/'}`)
+			await ensureDirectoryExistence(`${curDirectory + '/.ynjs/'}`)
 			const yateConfigBlueprint = require('./InternalTemplates/YateConfigTemplate')()
-			await renderBlueprint(yateConfigBlueprint, { templates_dir: './.yatenjs/' })
+			await renderBlueprint(yateConfigBlueprint, { templates_dir: './.ynjs/' })
 			process.stdout.write('Created config file\n')
 			const config = JSON.parse(yateConfigBlueprint.parts[0]["config.json"])
 			const templateBlueprint = require('./InternalTemplates/TBlueprintTemplate')()
@@ -68,7 +68,7 @@ const argv = yargs(hideBin(process.argv))
 		(argv) => {
 			try {
 				const curDirectory = process.cwd()
-				const config = require(`${curDirectory + '/.yatenjs/config.json'}`)
+				const config = require(`${curDirectory + '/.ynjs/config.json'}`)
 				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...argv.options && JSON.parse(argv.options) })
 				renderBlueprint(blueprint, { templates_dir: argv.directory })
 			} catch (templateErr) {
@@ -82,7 +82,7 @@ const argv = yargs(hideBin(process.argv))
 			// Test if we can find the config in the root of the repo the command was run from
 			try {
 				const curDirectory = process.cwd()
-				const config = require(`${curDirectory + '/.yatenjs/config.json'}`)
+				const config = require(`${curDirectory + '/.ynjs/config.json'}`)
 				if (!config) {
 					throw new Error('No configuration found')
 				}
@@ -95,13 +95,13 @@ const argv = yargs(hideBin(process.argv))
 					throw new Error(blueprintErr.message)
 				}
 			} catch (configErr) {
-				process.stdout.write('Configuration file not found. Please run `yatenjs init` or `yatenjs --help` for more information.\n')
+				process.stdout.write('Configuration file not found. Please run `ynjs init` or `ynjs --help` for more information.\n')
 				// throw new Error(configErr.message)
 			}
 		}
 		test()
 	})
-	.usage('Usage: YateNJS <command> [options]')
+	.usage('Usage: Ynjs <command> [options]')
 	.epilog(`copyright © ${copyrightYear}`)
 	.argv
 
