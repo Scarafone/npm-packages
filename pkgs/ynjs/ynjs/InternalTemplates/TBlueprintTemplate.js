@@ -38,7 +38,7 @@ module.exports = TBlueprint
 `
 
 	return {
-		parts: [{ [options.argv.name || 'template.js']: getTemplate(options) }],
+		parts: [{ [options.argv.name || 'ExampleTemplate.js']: getTemplate(options) }],
 	}
 }
 

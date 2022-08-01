@@ -1,5 +1,5 @@
 {
-  "name": "@scarafone/yatenjs",
+  "name": "@scarafone/ynjs",
   "version": "0.0.1",
   "description": "Yet another template engine for Node JS",
   "main": "index.js",
@@ -16,5 +16,5 @@
     "@scarafone/files-helper": "^0.0.4",
     "yargs": "^17.5.1"
   },
-  "bin": "YateNJS/index.js"
+  "bin": "ynjs/index.js"
 }
