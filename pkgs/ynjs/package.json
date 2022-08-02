@@ -16,5 +16,5 @@
     "@scarafone/files-helper": "^0.0.4",
     "yargs": "^17.5.1"
   },
-  "bin": "ynjs/index.js"
+  "bin": "ynjs/ynjs.js"
 }

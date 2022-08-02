@@ -105,6 +105,6 @@ const argv = yargs(hideBin(process.argv))
 	.epilog(`copyright © ${copyrightYear}`).argv
 
 if (argv && argv._ && Object.keys(argv._).length <= 0) {
-	process.stdout.write('\nYet Another Template Engine')
-	process.stdout.write('\nUsage: yatensjs --help')
+	process.stdout.write('\nYet Another Template Engine\n')
+	process.stdout.write('\nUsage: yatensjs --help\n')
 }
