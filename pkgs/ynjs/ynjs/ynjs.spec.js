@@ -20,7 +20,22 @@ describe('YNJS Test Suite', () => {
                     return
                 }
                 console.log(`stdout: ${stdout.toString()}`)
-                resolve()
+
+                exec("ynjs --version", (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`)
+                        return
+                    }
+                    if (stderr) {
+                        console.log(`stderr: ${stderr}`)
+                        return
+                    }
+
+                    console.log(`stdout 2: ${stdout.toString()}`)
+
+                    resolve()
+                })
+
             })
         })
     })
