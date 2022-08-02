@@ -31,7 +31,7 @@ describe('Data Source Collector Suite', () => {
 		})
 	})
 
-	it('Should fetch data from data source', async () => {
+	xit('Should fetch data from data source', async () => {
 		const source = {
 			id: 3,
 			name: 'Leader Boards',
@@ -47,7 +47,7 @@ describe('Data Source Collector Suite', () => {
 		expect(results.length >= 1).toBe(true)
 	})
 
-	it('Should fetch data from data source and format it', async () => {
+	xit('Should fetch data from data source and format it', async () => {
 		const source = {
 			id: 3,
 			name: 'Leader Boards',
@@ -71,12 +71,12 @@ describe('Data Source Collector Suite', () => {
 		})
 	})
 
-	it('Should return null if no data sources are passed in', async () => {
+	xit('Should return null if no data sources are passed in', async () => {
 		const result = await getDataFromSources(null)
 		expect(result).toStrictEqual(null)
 	})
 
-	it('Should throw error if invalid URL is passed', async () => {
+	xit('Should throw error if invalid URL is passed', async () => {
 		const source = {
 			id: 3,
 			name: 'Leader Boards',

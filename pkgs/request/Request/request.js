@@ -3,6 +3,8 @@ const Axios = require('axios')
  * GETRequest
  * @param {*} url String representation of an http(s) valid URL address
  * @param {*} headers Object of any additional headers required to be sent with request
+ * @param {*} options { verbose: false, shouldThrowError: false }
+ * @returns Either returns the results of the API call, or empty object if shouldThrowError function will throw stack error will need to be caught in try catch block
  */
 async function GETRequest(url, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
@@ -21,12 +23,13 @@ async function GETRequest(url, headers, options = { verbose: false, shouldThrowE
 }
 
 /**
+ * Post Request
  * 
- * @param {*} url 
- * @param {*} body 
- * @param {*} headers 
- * @param {*} options 
- * @returns 
+ * @param {*} url The url for the request to go to
+ * @param {*} body JSON Object representing the data to be passed along with the request 
+ * @param {*} headers Header JSON object usually includes at minimum some authorization header { authorization: "JWT Token"}
+ * @param {*} options { verbose: false, shouldThrowError: false }
+ * @returns Either returns the results of the API call, or empty object if shouldThrowError function will throw stack error will need to be caught in try catch block
  */
 async function POSTRequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
@@ -45,12 +48,13 @@ async function POSTRequest(url, body, headers, options = { verbose: false, shoul
 }
 
 /**
+ * Patch Request
  * 
- * @param {*} url 
- * @param {*} body 
- * @param {*} headers 
- * @param {*} options 
- * @returns 
+ * @param {*} url The url for the request to go to
+ * @param {*} body JSON Object representing the data to be passed along with the request 
+ * @param {*} headers Header JSON object usually includes at minimum some authorization header { authorization: "JWT Token"}
+ * @param {*} options { verbose: false, shouldThrowError: false }
+ * @returns Either returns the results of the API call, or empty object if shouldThrowError function will throw stack error will need to be caught in try catch block
  */
 async function PATCHRequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {
@@ -69,12 +73,13 @@ async function PATCHRequest(url, body, headers, options = { verbose: false, shou
 }
 
 /**
+ * Delete Request
  * 
- * @param {*} url 
- * @param {*} body 
- * @param {*} headers 
- * @param {*} options 
- * @returns 
+ * @param {*} url The url for the request to go to
+ * @param {*} body JSON Object representing the data to be passed along with the request 
+ * @param {*} headers Header JSON object usually includes at minimum some authorization header { authorization: "JWT Token"}
+ * @param {*} options { verbose: false, shouldThrowError: false }
+ * @returns Either returns the results of the API call, or empty object if shouldThrowError function will throw stack error will need to be caught in try catch block
  */
 async function DELETERequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
 	try {

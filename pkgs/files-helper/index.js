@@ -1,6 +1,7 @@
 module.exports = {
     closeFile,
     deleteFile,
+    deleteDirectory,
     ensureDirectoryExistence,
     readFile,
     writeFile,

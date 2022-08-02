@@ -48,7 +48,7 @@ const argv = yargs(hideBin(process.argv))
 			const yateConfigBlueprint = require('./InternalTemplates/YateConfigTemplate')()
 			await renderBlueprint(yateConfigBlueprint, { templates_dir: './.ynjs/' })
 			process.stdout.write('Created config file\n')
-			const config = JSON.parse(yateConfigBlueprint.parts[0]["config.json"])
+			const config = JSON.parse(yateConfigBlueprint.parts[0]['config.json'])
 			const templateBlueprint = require('./InternalTemplates/TBlueprintTemplate')()
 			renderBlueprint(templateBlueprint, config)
 			process.stdout.write('Created default sample template\n')
@@ -69,10 +69,10 @@ const argv = yargs(hideBin(process.argv))
 			try {
 				const curDirectory = process.cwd()
 				const config = require(`${curDirectory + '/.ynjs/config.json'}`)
-				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...argv.options && JSON.parse(argv.options) })
+				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...(argv.options && JSON.parse(argv.options)) })
 				renderBlueprint(blueprint, { templates_dir: argv.directory })
 			} catch (templateErr) {
-				process.stdout.write("Error", templateErr.message + "\n") 
+				process.stdout.write('Error', templateErr.message + '\n')
 				throw templateErr
 			}
 		}
@@ -102,9 +102,7 @@ const argv = yargs(hideBin(process.argv))
 		test()
 	})
 	.usage('Usage: Ynjs <command> [options]')
-	.epilog(`copyright © ${copyrightYear}`)
-	.argv
-
+	.epilog(`copyright © ${copyrightYear}`).argv
 
 if (argv && argv._ && Object.keys(argv._).length <= 0) {
 	process.stdout.write('\nYet Another Template Engine')
