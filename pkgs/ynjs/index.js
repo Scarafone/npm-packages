@@ -1,2 +1,2 @@
 #! /usr/bin/env node
-module.exports = ynjs = require('./ynjs/index')
+module.exports = ynjs = require('./ynjs/ynjs')

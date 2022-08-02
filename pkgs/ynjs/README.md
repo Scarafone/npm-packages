@@ -1,5 +1,5 @@
 # YNJS
-Yet Another Template Engine (N)ode JS
+Yet another template engine Node JS
 
 # Problem
 
