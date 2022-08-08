@@ -14,19 +14,19 @@
  * and update your comments so that people know what kind of options your
  * template takes.
  */
-function TBlueprint(options) {
-	const getJESTConfig = (options) => `{
-"testRegex": "((\/\.|/*.)(spec))\/\.js?$",
-"collectCoverage": true,
-"coverageReporters": [
-    "json",
-    "html",
-    "lcov"
-],
-"roots": ["./"]
+function TBlueprint(options = { name: 'unnamed' }) {
+    const getJESTConfig = () => `{
+    "testRegex": "((\/\.|/*.)(spec))\/\.js?$",
+    "collectCoverage": true,
+    "coverageReporters": [
+        "json",
+        "html",
+        "lcov"
+    ],
+    "roots": ["./"]
 }`
 
-	const getPackageJSON = (options) => `{
+    const getPackageJSON = (options) => `{
     "name": "@scarafone/${options.name.toLowerCase()}",
     "version": "0.0.1",
     "description": "${options.desc || 'Please Populate Description'}",
@@ -47,7 +47,7 @@ function TBlueprint(options) {
 }
 `
 
-	const getObjectJS = (options) => `
+    const getObjectJS = (options) => `
 /**
  * ${options.name}
  * 
@@ -58,7 +58,7 @@ function ${options.name}() {}
 module.exports = ${options.name}
     `
 
-	const getObjectJSSpec = (options) => `
+    const getObjectJSSpec = (options) => `
 const ${options.name} = require('./${options.name}')
 
 describe('${options.name} Suite', () => {
@@ -68,16 +68,16 @@ describe('${options.name} Suite', () => {
 })
     `
 
-	const getIndex = (options) => `module.exports = ${options.name} = require('./${options.name}/${options.name}')`
+    const getIndex = (options) => `module.exports = ${options.name} = require('./${options.name}/${options.name}')`
 
-	return {
-		parts: [
-			{ [`${options.name}/jest.config.json`]: getJESTConfig(options) },
-			{ [`${options.name}/package.json`]: getPackageJSON(options) },
-			{ [`${options.name}/index.js`]: getIndex(options) },
-			{ [`${options.name}/${options.name}/${options.name}.js`]: getObjectJS(options) },
-			{ [`${options.name}/${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) },
-		],
-	}
+    return {
+        parts: [
+            { [`${options.name}/jest.config.json`]: getJESTConfig(options) },
+            { [`${options.name}/package.json`]: getPackageJSON(options) },
+            { [`${options.name}/index.js`]: getIndex(options) },
+            { [`${options.name}/${options.name}/${options.name}.js`]: getObjectJS(options) },
+            { [`${options.name}/${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) },
+        ],
+    }
 }
 module.exports = TBlueprint

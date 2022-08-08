@@ -9,6 +9,12 @@ const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
 
 const copyrightYear = '2022'
+
+
+function print(text) {
+	process.stdout.write(`${text}\n`)
+}
+
 /**
  * TODO
  * - Test if package has proper configs for command
@@ -18,6 +24,7 @@ const copyrightYear = '2022'
  *  - Using a TemplateBlueprint created in the previous step to create a template
  *  - Read contents and create
  */
+
 
 function renderBlueprint(blueprint, config) {
 	blueprint.parts.forEach((part) => {
@@ -43,15 +50,19 @@ const argv = yargs(hideBin(process.argv))
 			// Test for config
 			readFile(`${curDirectory + '/.ynjs/config.json'}`)
 		} catch (directoryErr) {
-			process.stdout.write('Directory not found, we will now create the directory and set up some default files\n')
+			print('Directory not found, we will now create the directory and set up some default files\n')
 			await ensureDirectoryExistence(`${curDirectory + '/.ynjs/'}`)
+			
 			const yateConfigBlueprint = require('./InternalTemplates/YateConfigTemplate')()
 			await renderBlueprint(yateConfigBlueprint, { templates_dir: './.ynjs/' })
-			process.stdout.write('Created config file\n')
+			
+			print('Created config file\n')
+			
 			const config = JSON.parse(yateConfigBlueprint.parts[0]['config.json'])
 			const templateBlueprint = require('./InternalTemplates/TBlueprintTemplate')()
+			
 			renderBlueprint(templateBlueprint, config)
-			process.stdout.write('Created default sample template\n')
+			print('Created default sample template\n')
 		}
 		// TODO: Test if application directory already exists
 		// TODO: Create application directory
@@ -59,21 +70,33 @@ const argv = yargs(hideBin(process.argv))
 		// TODO: Create config json
 		// TODO: Test if templates folder exists?
 		// TODO: Create initial blueprint
-		process.stdout.write('Operation complete')
+		print('Operation complete')
 	})
 	.command(
-		['create [template] [directory] [options]', 'make'],
+		['create [template] [directory] [name] [options]', 'make'],
 		'Create a new file from a named blueprint template at the specified directory.\n\nYou can pass an optional json string object to pass additional custom options to the blueprint. \n\nWill create the directory if it does not already exists.\n',
 		{},
-		(argv) => {
+		(argv) => {			
 			try {
 				const curDirectory = process.cwd()
 				const config = require(`${curDirectory + '/.ynjs/config.json'}`)
+				const renderDir = argv.directory || curDirectory
+				console.log({
+					renderDir
+				})
+				let usableOptions = argv.options && JSON.parse(argv.options)
+				console.log({
+					usableOptions
+				})
 				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...(argv.options && JSON.parse(argv.options)) })
-				renderBlueprint(blueprint, { templates_dir: argv.directory })
+				renderBlueprint(blueprint, { templates_dir: renderDir })
 			} catch (templateErr) {
-				process.stdout.write('Error', templateErr.message + '\n')
-				throw templateErr
+				if (templateErr.code === "MODULE_NOT_FOUND") {
+					print('ERROR: Double check the name and ensure it matches a javascript file in your templates directory.\n See ynjs create --help for more details.\n')
+				} else {
+					print(`${templateErr.code}: ${templateErr.message}`)
+					// throw templateErr
+				}
 			}
 		}
 	)
@@ -95,7 +118,7 @@ const argv = yargs(hideBin(process.argv))
 					throw new Error(blueprintErr.message)
 				}
 			} catch (configErr) {
-				process.stdout.write('Configuration file not found. Please run `ynjs init` or `ynjs --help` for more information.\n')
+				print('Configuration file not found. Please run `ynjs init` or `ynjs --help` for more information.\n')
 				// throw new Error(configErr.message)
 			}
 		}
@@ -105,6 +128,6 @@ const argv = yargs(hideBin(process.argv))
 	.epilog(`copyright © ${copyrightYear}`).argv
 
 if (argv && argv._ && Object.keys(argv._).length <= 0) {
-	process.stdout.write('\nYet Another Template Engine\n')
-	process.stdout.write('\nUsage: yatensjs --help\n')
+	print('\nYet Another Template Engine\n')
+	print('\nUsage: yatensjs --help\n')
 }
