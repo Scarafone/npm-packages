@@ -35,5 +35,5 @@ describe('YNJS Test Suite', () => {
         expect(result === `${packageJSON.version}\n`).toEqual(true)
 
     })
-
+    
 })
