@@ -4,6 +4,7 @@
 
 const { ensureDirectoryExistence, readFile } = require('@scarafone/files-helper')
 const path = require('path')
+2
 const fs = require('fs')
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
@@ -43,7 +44,7 @@ function renderBlueprint(blueprint, config) {
 }
 
 const argv = yargs(hideBin(process.argv))
-	.command(['init'], 'Initialize use of the application and create a config folder in the root directory of the executed directory\n', {}, async (argv) => {
+	.command(['init'], 'Initialize use of the application and create a config folder in the current directory\n', {}, async (argv) => {
 		process.stdout.write('Initialize Application Ynjs')
 		const curDirectory = process.cwd()
 		try {
@@ -81,14 +82,12 @@ const argv = yargs(hideBin(process.argv))
 				const curDirectory = process.cwd()
 				const config = require(`${curDirectory + '/.ynjs/config.json'}`)
 				const renderDir = argv.directory || curDirectory
-				console.log({
-					renderDir
-				})
-				let usableOptions = argv.options && JSON.parse(argv.options)
-				console.log({
-					usableOptions
-				})
-				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...(argv.options && JSON.parse(argv.options)) })
+				let usableOptions = argv.name && { name: argv.name } || argv.options && JSON.parse(argv.options) || null
+				if (!usableOptions) {
+					print('ERROR: At least a name `--name="YourName.js" must be present or an options JSON object.')
+					return 0
+				}
+				const blueprint = require(`${curDirectory}/${config.templates_dir}/${argv.template}`)({ ...usableOptions })
 				renderBlueprint(blueprint, { templates_dir: renderDir })
 			} catch (templateErr) {
 				if (templateErr.code === "MODULE_NOT_FOUND") {
@@ -100,7 +99,7 @@ const argv = yargs(hideBin(process.argv))
 			}
 		}
 	)
-	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location\n', {}, (argv) => {
+	.command(['template [name] [location]'], 'Create a new template boilerplate named file at the location. If no --location="" is passed it will default to the directory configured in options. \n', {}, (argv) => {
 		async function test() {
 			// Test if we can find the config in the root of the repo the command was run from
 			try {
@@ -123,6 +122,9 @@ const argv = yargs(hideBin(process.argv))
 			}
 		}
 		test()
+	})
+	.command(['templify [fileOrFolder]'], "Create a template from a folder or file reference. If it's a directory the process will extract each file into its own parts options. This will automatically output to the template dir configured in options.", {}, async (argv) => {
+		process.stdout.write("Not implmented\n")
 	})
 	.usage('Usage: Ynjs <command> [options]')
 	.epilog(`copyright © ${copyrightYear}`).argv

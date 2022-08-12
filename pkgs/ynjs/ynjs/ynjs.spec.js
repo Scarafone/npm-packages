@@ -9,9 +9,9 @@ describe('YNJS Test Suite', () => {
         expect(typeof ynjs).toBe('object')
     })
 
-    it('should install the package', async () => {
+    xit('should install the package', async () => {
         await new Promise((resolve, reject) => {
-            exec("npm i -g .", async (error, stdout, stderr) => {
+            exec("npm i ./pkgs/ynjs --location=global", async (error, stdout, stderr) => {
                 if (error || stderr) { console.log(`error: ${error} | stderr: ${stderr}`); return; }
                 resolve()
             })
