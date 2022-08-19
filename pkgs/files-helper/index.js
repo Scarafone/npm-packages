@@ -1,8 +1,9 @@
 module.exports = {
     closeFile,
+    createDirectory,
     deleteFile,
     deleteDirectory,
-    ensureDirectoryExistence,
+    readDirectory,
     readFile,
     writeFile,
 } = require('./FilesHelper/files-helper')

@@ -1,3 +1,4 @@
+const { create } = require('domain')
 const FS = require('fs')
 const Path = require('path')
 // Utility class for working with files
@@ -10,18 +11,16 @@ function ensureDirectoryExistence(filePath) {
 	return FS.mkdirSync(dirname)
 }
 
-function readFile(filePath) {
-	const buffer = FS.readFileSync(filePath, {
-		encoding: 'utf8',
+function readFile(filePath, options = null) {
+	const buffer = FS.readFileSync(filePath, options || {
+		encoding: 'utf-8',
 		flag: 'r',
 	})
 	return JSON.parse(buffer)
 }
 
 function writeFile(filePath, data, shouldEnsurePathExists = false) {
-	if (shouldEnsurePathExists) {
-		ensureDirectoryExistence(filePath)
-	}
+	shouldEnsurePathExists && ensureDirectoryExistence(filePath)
 	FS.writeFileSync(filePath, JSON.stringify(data))
 }
 
@@ -30,13 +29,24 @@ function deleteFile(filePath) {
 }
 
 function deleteDirectory(directoryPath, recursive = false) {
-	FS.rmdirSync(directoryPath, { recursive })
+	FS.rmSync(directoryPath, { recursive })
+}
+
+function readDirectory(directoryPath, ensureDirectoryExistence = false, options = null) {
+	ensureDirectoryExistence && createDirectory(directoryPath)
+	return FS.readdirSync(directoryPath, options)
+}
+
+function createDirectory(directoryPath) {
+	return ensureDirectoryExistence(directoryPath + " ")
 }
 
 module.exports = {
 	closeFile: FS.closeSync,
 	deleteFile,
 	ensureDirectoryExistence,
+	createDirectory,
+	readDirectory,
 	deleteDirectory,
 	readFile,
 	writeFile,

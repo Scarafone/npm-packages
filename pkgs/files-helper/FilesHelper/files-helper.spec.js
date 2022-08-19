@@ -4,7 +4,7 @@
  * 
  */
 
-const { readFile, writeFile, deleteFile, deleteDirectory } = require('./files-helper')
+const { readFile, writeFile, deleteFile, deleteDirectory, createDirectory, readDirectory, ensureDirectoryExistence,   } = require('./files-helper')
 
 describe('Files Helper Test Suite', () => {
 
@@ -97,6 +97,15 @@ describe('Files Helper Test Suite', () => {
         }
     })
 
-    
+    it('Should create and read contents of a directory', () => {
+        try {
+            const testLocation = "./test/"
+            createDirectory(testLocation)
+        } catch (err) {
+
+        } finally {
+            // deleteDirectory("./test", true)
+        }
+    })    
 
 })
