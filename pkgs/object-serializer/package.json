@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/object-serializer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple function for trimming data out of objects based on an array of types map and key",
   "main": "index.js",
   "scripts": {

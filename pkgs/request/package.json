@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/request",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Wrapper utility functions around axios designed to provide convenience methods and handlers",
   "main": "index.js",
   "scripts": {
