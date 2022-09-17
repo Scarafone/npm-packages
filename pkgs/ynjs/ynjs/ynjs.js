@@ -4,7 +4,7 @@
 
 const { ensureDirectoryExistence, readFile } = require('@scarafone/files-helper')
 const path = require('path')
-2
+
 const fs = require('fs')
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
