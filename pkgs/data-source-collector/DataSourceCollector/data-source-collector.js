@@ -28,6 +28,7 @@ function DataSource(id, name, api_url, api_auth_token, pagination_map, object_ma
  * @param {*} options An options object, currently only supports { separate_by_source: false }
  * Enabling separate by source will sort the data in a map and by key values by source
  * Data Source so you can know where the results came from.
+ * Example:
  * ```
     {
         id: 3,

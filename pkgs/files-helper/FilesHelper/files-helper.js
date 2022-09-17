@@ -11,17 +11,17 @@ function ensureDirectoryExistence(filePath) {
 	return FS.mkdirSync(dirname)
 }
 
-function readFile(filePath, options = null) {
+function readFile(filePath, options = null, parseAsJSON = true) {
 	const buffer = FS.readFileSync(filePath, options || {
 		encoding: 'utf-8',
 		flag: 'r',
 	})
-	return JSON.parse(buffer)
+	return parseAsJSON ? JSON.parse(buffer) : buffer
 }
 
-function writeFile(filePath, data, shouldEnsurePathExists = false) {
+function writeFile(filePath, data, shouldEnsurePathExists = false, parseAsJSON = true) {
 	shouldEnsurePathExists && ensureDirectoryExistence(filePath)
-	FS.writeFileSync(filePath, JSON.stringify(data))
+	FS.writeFileSync(filePath, parseAsJSON ? JSON.stringify(data) : data)
 }
 
 function deleteFile(filePath) {
@@ -46,8 +46,8 @@ module.exports = {
 	deleteFile,
 	ensureDirectoryExistence,
 	createDirectory,
-	readDirectory,
 	deleteDirectory,
+	readDirectory,
 	readFile,
 	writeFile,
 }
