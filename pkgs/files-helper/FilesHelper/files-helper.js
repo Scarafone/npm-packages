@@ -1,6 +1,5 @@
-const { create } = require('domain')
-const FS = require('fs')
-const Path = require('path')
+const FS = require('node:fs')
+const Path = require('node:path')
 // Utility class for working with files
 
 function ensureDirectoryExistence(filePath) {
