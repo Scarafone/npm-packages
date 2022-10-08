@@ -1,0 +1,19 @@
+{
+    "name": "@scarafone/cryptography",
+    "version": "0.0.1",
+    "description": "Cryptographic wrapper functions built around the `Node:Crypto` package",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "keywords": [
+        "Cryptographic",
+        "cryptography",
+        "Crypto"
+    ],
+    "author": "Brent Scarafone",
+    "license": "MIT",
+    "dependencies": {
+        "@scarafone/files-helper": "^0.0.9"
+    }
+}

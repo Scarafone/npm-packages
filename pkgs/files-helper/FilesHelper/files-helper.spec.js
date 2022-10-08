@@ -4,7 +4,7 @@
  * 
  */
 
-const { readFile, writeFile, deleteFile, deleteDirectory, createDirectory, readDirectory, ensureDirectoryExistence,   } = require('./files-helper')
+const { readFile, writeFile, deleteFile, deleteDirectory, createDirectory, readDirectory, ensureDirectoryExistence, } = require('./files-helper')
 
 describe('Files Helper Test Suite', () => {
 
@@ -12,7 +12,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            writeFile(dummyLocation, dummyData) 
+            writeFile(dummyLocation, dummyData)
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
@@ -21,7 +21,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            readFile(dummyLocation) 
+            readFile(dummyLocation)
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
@@ -30,7 +30,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            readFile(dummyLocation) 
+            readFile(dummyLocation)
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
@@ -39,7 +39,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            readFile(dummyLocation) 
+            readFile(dummyLocation)
         } catch (err) {
             expect(err.message).toBe("ENOENT: no such file or directory, open './test/test.json'")
         }
@@ -48,7 +48,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            
+
             writeFile(dummyLocation, dummyData, true)
             const successResult = readFile(dummyLocation)
             expect(successResult).not.toBe(null)
@@ -73,7 +73,7 @@ describe('Files Helper Test Suite', () => {
         try {
             const dummyLocation = "./test/test.json"
             const dummyData = { "key": "value" }
-            
+
             writeFile(dummyLocation, dummyData, true)
             deleteFile(dummyLocation, true)
             deleteDirectory("./test", true)
@@ -91,7 +91,7 @@ describe('Files Helper Test Suite', () => {
             deleteDirectory("./test")
             readFile(dummyLocation)
         } catch (err) {
-            expect(err.message).toBe("ENOTEMPTY: directory not empty, rmdir './test'")
+            expect(err.message).toBe("Path is a directory: rm returned EISDIR (is a directory) ./test")
         } finally {
             deleteDirectory("./test", true)
         }
@@ -106,6 +106,6 @@ describe('Files Helper Test Suite', () => {
         } finally {
             // deleteDirectory("./test", true)
         }
-    })    
+    })
 
 })

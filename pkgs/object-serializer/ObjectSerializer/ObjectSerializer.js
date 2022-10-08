@@ -3,8 +3,8 @@ const isEmpty = require('@scarafone/is-empty/is-empty')
 /**
  * 
  * @param {*} object The object in which you wish to scrub data from. 
- * @param {*} unserializableFields A map object that describes based on a type key, what fields should be allowed or not 
- * @param {*} typeKey The type key defined in the unserializableFields mapping 
+ * @param {*} deserializableFields A map object that describes based on a type key, what fields should be allowed or not 
+ * @param {*} typeKey The type key defined in the deserializableFields mapping 
 	``` 
 
 	Example: {
@@ -19,16 +19,16 @@ const isEmpty = require('@scarafone/is-empty/is-empty')
 * If default is not defined, then it will simply not return any fields, but you will
 * get an empty object
 */
-function ObjectSerializer(object, unserializableFields, typeKey = 'default') {
-	if (!unserializableFields) {
-		throw new Error('UnserializableFields is required')
+function ObjectSerializer(object, deserializableFields, typeKey = 'default') {
+	if (!deserializableFields) {
+		throw new Error('DeserializableFields is required')
 	}
 	if (isEmpty(object)) {
 		return object
 	}
-	var toSerializeOut = unserializableFields[typeKey]
+	var toSerializeOut = deserializableFields[typeKey]
 	if (isEmpty(toSerializeOut)) {
-		toSerializeOut = unserializableFields['default']
+		toSerializeOut = deserializableFields['default']
 		if (isEmpty(toSerializeOut)) {
 			toSerializeOut = Object.keys(object)
 		}

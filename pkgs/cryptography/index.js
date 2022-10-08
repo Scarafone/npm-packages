@@ -1,0 +1,1 @@
+module.exports = { Decrypt, Encrypt } = require("./cryptography.js")
