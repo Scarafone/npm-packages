@@ -1,0 +1,19 @@
+{
+    "name": "@scarafone/ispawn",
+    "version": "0.0.1",
+    "description": "Please Populate Description",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --config ./jest.config.json --coverage",
+        "test:watch": "npm run test -- --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Scarafone/npm-packages/tree/main/ispawn"
+    },
+    "author": "Brent Scarafone",
+    "license": "MIT",
+    "devDependencies": {
+        "jest": "^27.5.1"
+    }
+}

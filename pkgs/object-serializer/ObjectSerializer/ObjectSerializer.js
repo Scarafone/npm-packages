@@ -8,9 +8,9 @@ const isEmpty = require('@scarafone/is-empty/is-empty')
 	``` 
 
 	Example: {
-		'admin': [''],
+		'admin': ['key_name'],
 		'default': [
-			'permissions'
+			'grants_permission'
 		]
 	}
 
