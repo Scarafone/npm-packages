@@ -1,4 +1,4 @@
-# YNJS
+# YATJS
 Yet another template engine Node JS
 
 # Problem
