@@ -1,6 +1,6 @@
 {
     "name": "@scarafone/cryptography",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Cryptographic wrapper functions built around the `Node:Crypto` package",
     "main": "index.js",
     "scripts": {
