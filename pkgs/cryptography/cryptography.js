@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
  * cryptography.js
- * @version: 0.0.1
  * 
  * References: 
  * - https://nodejs.org/api/crypto.html#determining-if-crypto-support-is-unavailable
@@ -12,7 +11,7 @@
 const { readFile, writeFile } = require('@scarafone/files-helper')
 
 // Common delimiter for the crypto algorithm
-const delimiter = '.'
+const delimiter = '.\n'
 // Hashing algo
 const hashAlgo = "sha256"
 // Cipher IV Algo
@@ -40,6 +39,7 @@ function getCryptography() {
  * Encrypt a source to a destination with a private key
  * 
  * @since 0.0.1
+ * @updated 1.0.0
  * 
  * @param {string} source 
  * @param {string} destination 
@@ -74,6 +74,7 @@ function Encrypt(source, destination, privateKey, options = { silent: true }) {
  * Decrypt
  * 
  * @since 0.0.1
+ * @updated 1.0.0
  * 
  * Decrypt a source to a destination with a private key
  * 
