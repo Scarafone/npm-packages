@@ -9,6 +9,8 @@
 
 const isEmpty = require('./is-empty')
 
+
+
 describe('Is Empty Suite', () => {
     it ('Should return true for various cases of "empty"', () => {
         const testObj1 = {}
@@ -29,3 +31,4 @@ describe('Is Empty Suite', () => {
         expect(isEmpty(testObj2)).toEqual(false)
     })
 })
+
