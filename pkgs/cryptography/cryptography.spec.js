@@ -52,7 +52,7 @@ describe("Cryptography Test Suite", () => {
     it("should encrypt a file and then decrypt the file", () => {
 
         const testFileData = "sample-data-to-encrypt"
-        const testFileLoc = "./.test-file"
+        const testFileLoc = "./.test-file.txt"
         const testFileDestination = `${testFileLoc}.encrypted`
         const testPrivateKey = "super-secret-secure-totally-private-key"
 

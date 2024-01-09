@@ -1,24 +1,17 @@
 #!/usr/bin/env node
 /**
  * cryptography.js
- * @version: 0.0.1
  * 
  * References: 
  * - https://nodejs.org/api/crypto.html#determining-if-crypto-support-is-unavailable
  * - https://nodejs.org/en/knowledge/cryptography/how-to-use-crypto-module/
  * 
  */
-// *** WARNING ***
-// DON'T CHANGE THIS VALUE UNLESS YOU PLAN TO ENCRYPT A NEW FILE IT WILL CAUSE THE DEVELOPER TOKEN TO BE USELESS
-// TODO: If required, find a better way to import this safely, for now I think it will be okay existing here in the code as such.
-const publicKey = process.env.PUBLIC_KEY || 'super-secret-hash' // Random MD5 Hash Value
-
 
 const { readFile, writeFile } = require('@scarafone/files-helper')
 
-
 // Common delimiter for the crypto algorithm
-const delimiter = '/*.'
+const delimiter = '.\n'
 // Hashing algo
 const hashAlgo = "sha256"
 // Cipher IV Algo
@@ -46,6 +39,7 @@ function getCryptography() {
  * Encrypt a source to a destination with a private key
  * 
  * @since 0.0.1
+ * @updated 1.0.0
  * 
  * @param {string} source 
  * @param {string} destination 
@@ -60,8 +54,6 @@ function Encrypt(source, destination, privateKey, options = { silent: true }) {
 
     // Create buffer for storage with initializing vector
     const resizeIV = Buffer.allocUnsafe(16)
-    const iv = crypto.createHash(hashAlgo).update(publicKey).digest()
-    iv.copy(resizeIV)
     const key = crypto.createHash(hashAlgo).update(privateKey).digest()
     const cipher = crypto.createCipheriv(cipherIVAlgo, key, resizeIV)
 
@@ -82,6 +74,7 @@ function Encrypt(source, destination, privateKey, options = { silent: true }) {
  * Decrypt
  * 
  * @since 0.0.1
+ * @updated 1.0.0
  * 
  * Decrypt a source to a destination with a private key
  * 
@@ -103,8 +96,6 @@ function Decrypt(source, destination, privateKey, options = { silent: false }) {
 
     // Create buffer for storage with initializing vector
     const resizeIV = Buffer.allocUnsafe(16)
-    const iv = crypto.createHash(hashAlgo).update(publicKey).digest()
-    iv.copy(resizeIV)
     const key = crypto.createHash(hashAlgo).update(privateKey).digest()
     const decipher = crypto.createDecipheriv(cipherIVAlgo, key, resizeIV)
 

@@ -75,6 +75,7 @@ describe('${options.name} Suite', () => {
             { [`${options.name}/jest.config.json`]: getJESTConfig(options) },
             { [`${options.name}/package.json`]: getPackageJSON(options) },
             { [`${options.name}/index.js`]: getIndex(options) },
+            { [`${options.name}/README.md`]: `# ${options.name} ReadME \n Fill out information\n ---\n` },
             { [`${options.name}/${options.name}/${options.name}.js`]: getObjectJS(options) },
             { [`${options.name}/${options.name}/${options.name}.spec.js`]: getObjectJSSpec(options) },
         ],
