@@ -68,8 +68,20 @@ async function getDataFromSources (dataSources, options = null) {
     return formatResponsesToStyle(responses, formatStyle)
 }
 
-async function postDataToSources (dataSources, options = null) {
-    return true
+async function postDataToSources (data, dataSources, options = null) {
+    if (!dataSources) { return null }
+    let responses = {}
+    for (let index in dataSources) {
+        const source = dataSources[index]
+        try {
+            const response = await POSTRequest(source.api_url, data, { "Authorization": `${source.api_auth_token}` })
+            responses[source.id] = response
+        } catch (err) {
+            throw err
+        }
+    }
+    const formatStyle = (options && options.formatStyle) ? options.formatStyle : 'arr'
+    return formatResponsesToStyle(responses, formatStyle)
 }
 
 
