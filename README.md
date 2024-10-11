@@ -3,7 +3,7 @@
 <p>
 Single repository housing all @scarafone scoped packages. 
 
-Each one is published individually but the steps will be identical.
+Each one is published individually, but the steps will be identical.
 </p>
 
 
@@ -19,7 +19,7 @@ Each one is published individually but the steps will be identical.
 
 ## Developing
 
-- All packages must have 80% test coverage or hire before being committed to main.
+- All packages must have 80% test coverage or higher before committing to the main branch.
 - All packages must start at version `0.0.1` 
 
 
