@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/data-source-collector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utility functions for manipulating data from REST APIs in a generic way",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@scarafone/json-remapper": "^0.0.2",
-    "@scarafone/request": "^0.1.1"
+    "@scarafone/request": "^0.2.x"
   },
   "devDependencies": {
     "jest": "^27.5.1",

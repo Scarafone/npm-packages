@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/request",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Wrapper utility functions around axios designed to provide convenience methods and handlers",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,6 @@
   "author": "Brent Scarafone",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.2"
+    "axios": "^1.7.7"
   }
 }
