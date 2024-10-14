@@ -4,8 +4,9 @@
   "description": "Simple utility for remapping data based on a templated object",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest ."
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Scarafone/npm-packages/json-remapper"

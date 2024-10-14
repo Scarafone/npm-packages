@@ -30,6 +30,20 @@ function serializeObjFromMap(objToConvert, map) {
   })
   return newObj
 }
+function getValueFromKeyPath(obj, keyPath) {
+  if (!keyPath || !obj) {
+    return null;
+  }
+  const keys = keyPath.split('.');
+  let value = obj;
+  for (let key of keys) {
+    if (value[key] === undefined) {
+      return null;
+    }
+    value = value[key];
+  }
+  return value;
+}
 
 function getValueFromObjectForKeyPath(targetObj, keypath) {
   if (!keypath || !targetObj) {
