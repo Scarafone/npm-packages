@@ -1,6 +1,6 @@
 {
   "name": "@scarafone/data-source-collector",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Utility functions for manipulating data from REST APIs in a generic way",
   "main": "index.js",
   "scripts": {
