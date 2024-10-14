@@ -1,4 +1,4 @@
-const { GETRequest, POSTRequest } = require('@scarafone/request')
+const { GETRequest, POSTRequest, PATCHRequest, DELETERequest } = require('@scarafone/request')
 const Mapper = require('@scarafone/json-remapper')
 
 /**
@@ -84,6 +84,40 @@ async function postDataToSources(data, dataSources, options = null) {
     return formatResponsesToStyle(responses, formatStyle)
 }
 
+async function patchDataToSources(data, dataSources, options = null) {
+    if (!dataSources) { return null }
+    let responses = {}
+    for (let index in dataSources) {
+        const source = dataSources[index]
+        try {
+            const response = await PATCHRequest(source.api_url, data, { "Authorization": `${source.api_auth_token}` })
+            responses[source.id] = response
+        } catch (err) {
+            responses[source.id] = { error: err?.response?.data || err?.message || "Unknown" }
+        }
+    }
+    const formatStyle = (options && options.formatStyle) ? options.formatStyle : 'arr'
+    return formatResponsesToStyle(responses, formatStyle)
+}
+
+async function deleteDataFromSources(data, dataSources, options = null) {
+    if (!dataSources) { return null }
+    let responses = {}
+    for (let index in dataSources) {
+        const source = dataSources[index]
+        try {
+            const response = await DELETERequest(source.api_url, data, { "Authorization": `${source.api_auth_token}` })
+            responses[source.id] = response
+        } catch (err) {
+            responses[source.id] = { error: err?.response?.data || err?.message || "Unknown" }
+        }
+    }
+    const formatStyle = (options && options.formatStyle) ? options.formatStyle : 'arr'
+    return formatResponsesToStyle(responses, formatStyle)
+}
+
+
+
 
 /**
  * This function takes in a map of objects and given a supported formatting style
@@ -151,6 +185,8 @@ async function processResponseFromSource(response, source, options = null) {
 
 module.exports = {
     DataSource,
+    deleteDataFromSources,
     getDataFromSources,
+    patchDataToSources,
     postDataToSources,
 }

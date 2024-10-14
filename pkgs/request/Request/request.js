@@ -98,9 +98,26 @@ async function DELETERequest(url, body, headers, options = { verbose: false, sho
 	}
 }
 
+async function PUTRequest(url, body, headers, options = { verbose: false, shouldThrowError: false }) {
+	try {
+		const results = await Axios.put(url, body, {
+			headers: headers,
+		})
+		const data = results.data
+		return data
+	} catch (err) {
+		if (options) {
+			if (options.verbose) console.error('Error', err)
+			if (options.shouldThrowError) throw err
+		}
+		return []
+	}
+}
+
 module.exports = {
 	DELETERequest,
 	GETRequest,
 	PATCHRequest,
 	POSTRequest,
+	PUTRequest,
 }
