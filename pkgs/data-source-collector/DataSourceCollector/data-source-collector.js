@@ -1,4 +1,4 @@
-const { GETRequest } = require('@scarafone/request')
+const { GETRequest, POSTRequest } = require('@scarafone/request')
 const Mapper = require('@scarafone/json-remapper')
 
 /**
@@ -49,26 +49,26 @@ function DataSource(id, name, api_url, api_auth_token, pagination_map, object_ma
     ```
  * Returns a map of objects, keyed to the data sources id
  */
-async function getDataFromSources (dataSources, options = null) {
+async function getDataFromSources(dataSources, options = null) {
     if (!dataSources) { return null }
     let responses = {}
     for (let index in dataSources) {
         const source = dataSources[index]
         try {
-            const response = await GETRequest(source.api_url,  { "Authorization": `${source.api_auth_token}` })
+            const response = await GETRequest(source.api_url, { "Authorization": `${source.api_auth_token}` })
             const results = await processResponseFromSource(response, source, options)
-            if (results)  {
+            if (results) {
                 responses[source.id] = results
             }
         } catch (err) {
-            throw err
+            responses[source.id] = { error: err?.response?.data || err?.message || "Unknown" }
         }
     }
     const formatStyle = (options && options.formatStyle) ? options.formatStyle : 'arr'
     return formatResponsesToStyle(responses, formatStyle)
 }
 
-async function postDataToSources (data, dataSources, options = null) {
+async function postDataToSources(data, dataSources, options = null) {
     if (!dataSources) { return null }
     let responses = {}
     for (let index in dataSources) {
@@ -77,7 +77,7 @@ async function postDataToSources (data, dataSources, options = null) {
             const response = await POSTRequest(source.api_url, data, { "Authorization": `${source.api_auth_token}` })
             responses[source.id] = response
         } catch (err) {
-            throw err
+            responses[source.id] = { error: err?.response?.data || err?.message || "Unknown" }
         }
     }
     const formatStyle = (options && options.formatStyle) ? options.formatStyle : 'arr'
@@ -98,7 +98,7 @@ async function postDataToSources (data, dataSources, options = null) {
 function formatResponsesToStyle(responses, formatStyle) {
     switch (formatStyle) {
         case 'arr': {
-            return Object.values(responses).reduce((ac, cu) =>{
+            return Object.values(responses).reduce((ac, cu) => {
                 return ac.concat(cu)
             })
         }
