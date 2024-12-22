@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@scarafone/files-helper':
+        specifier: ^0.0.9
+        version: 0.0.9
+
+packages:
+
+  '@scarafone/files-helper@0.0.9':
+    resolution: {integrity: sha512-g7bzOHRmaUwGrUwMM60vPuz4uPvrXaGZx+gdtxOucSuZXpV9R9xZJwID7i8o52LpwX5Pn7qhNHPmZRpCuMYwnA==}
+
+snapshots:
+
+  '@scarafone/files-helper@0.0.9': {}

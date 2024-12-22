@@ -11,7 +11,7 @@
 const { readFile, writeFile } = require('@scarafone/files-helper')
 
 // Common delimiter for the crypto algorithm
-const delimiter = '.\n'
+const delimiter = '\n'
 // Hashing algo
 const hashAlgo = "sha256"
 // Cipher IV Algo
@@ -65,7 +65,8 @@ function Encrypt(source, destination, privateKey, options = { silent: true }) {
     parts.forEach(part => builder.push(cipher.update(part, 'binary', 'hex')))
     builder.push(cipher.final('hex'))
     const result = builder.join(delimiter)
-    writeFile(destination, result, true, false)
+    const encodedString = btoa(result);
+    writeFile(destination, encodedString, true, false)
     !options.silent && process.stdout.write("done!\n")
 
 }
@@ -102,7 +103,8 @@ function Decrypt(source, destination, privateKey, options = { silent: false }) {
     // Run decryption steps
     !options.silent && process.stdout.write("Decrypting source...", false)
     const sourceRef = readFile(source, null, false)
-    const parts = sourceRef.toString().split(delimiter)
+    const decodedString = atob(sourceRef.toString());
+    const parts = decodedString.split(delimiter)
     const builder = []
     parts.forEach(part => builder.push(decipher.update(part, 'hex', 'binary')))
     builder.push(decipher.final('binary'))
