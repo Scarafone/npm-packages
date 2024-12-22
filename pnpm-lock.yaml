@@ -33,6 +33,9 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
     devDependencies:
+      '@scarafone/cryptography':
+        specifier: ^1.1.0
+        version: 1.1.0
       jest:
         specifier: ^27.5.1
         version: 27.5.1
@@ -362,8 +365,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@scarafone/cryptography@1.1.0':
+    resolution: {integrity: sha512-hFEM3rX23+GKi0JGjuOdiH5um9/uLlrfjqJ57P7XzdQift6tdIJdeinx+h+1vcdm4nHosQxyXW3Cy+1SRbXqow==}
+
   '@scarafone/files-helper@0.0.3':
     resolution: {integrity: sha512-gdQhMfzfYd6n+koeit6MynT+ilKfOp2EGgsIWgEpguRBxDeLNWx6gmywsKp3e8No6Kt3XBE5zgd0rKvl8N+q7Q==}
+
+  '@scarafone/files-helper@0.0.9':
+    resolution: {integrity: sha512-g7bzOHRmaUwGrUwMM60vPuz4uPvrXaGZx+gdtxOucSuZXpV9R9xZJwID7i8o52LpwX5Pn7qhNHPmZRpCuMYwnA==}
 
   '@scarafone/is-empty@0.0.1':
     resolution: {integrity: sha512-HQokfEoblQdmjKQvlG5oJbkgVWqFZptTscY8sBcsHsRRuxYHARnTh5IEzepSa7FlAfUD/Ys9w/txzXM9xJiVAA==}
@@ -2302,7 +2311,13 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  '@scarafone/cryptography@1.1.0':
+    dependencies:
+      '@scarafone/files-helper': 0.0.9
+
   '@scarafone/files-helper@0.0.3': {}
+
+  '@scarafone/files-helper@0.0.9': {}
 
   '@scarafone/is-empty@0.0.1': {}
 

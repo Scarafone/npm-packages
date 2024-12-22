@@ -3,13 +3,14 @@
  * Script to encrypt environment variables
  */
 
-import { Decrypt } from '../pkgs/cryptography/cryptography';
+// import { Decrypt } from '@scarafone/cryptography';
+const { Decrypt } = require('../pkgs/cryptography');
 
 
 async function Main() {
 
-    const devEnv = '.env';
-    const destination = `${devEnv}.encrypted`;
+    const devEnv = '.env.dev';
+    const destination = `.env.encrypted`;
     const privateKey = '../.secrets/private.key';
 
     try {

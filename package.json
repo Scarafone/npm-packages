@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Scarafone/npm-packages#readme",
   "devDependencies": {
+    "@scarafone/cryptography": "^1.1.0",
     "jest": "^27.5.1",
     "jest-mock-axios": "^4.6.1"
   },

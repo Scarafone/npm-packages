@@ -45,31 +45,24 @@ function getCryptography() {
  * @param {string} destination 
  */
 function Encrypt(source, destination, privateKey, options = { silent: true }) {
+    const crypto = getCryptography();
 
-    if (!source || !destination || !privateKey) {
-        throw new Error(`Missing required values${!source ? ", a source" : ""}${!destination ? ", a destination" : ""}${!privateKey ? ", a private key" : ""}`)
-    }
+    const iv = crypto.randomBytes(16); // Generate a random IV
+    const key = crypto.createHash(hashAlgo).update(privateKey).digest();
+    const cipher = crypto.createCipheriv(cipherIVAlgo, key, iv);
 
-    const crypto = getCryptography()
+    const sourceRef = readFile(source, null, false);
+    const encrypted = cipher.update(sourceRef.toString(), 'utf8', 'hex') + cipher.final('hex');
 
-    // Create buffer for storage with initializing vector
-    const resizeIV = Buffer.allocUnsafe(16)
-    const key = crypto.createHash(hashAlgo).update(privateKey).digest()
-    const cipher = crypto.createCipheriv(cipherIVAlgo, key, resizeIV)
+    // Combine IV and encrypted data
+    const dataToStore = {
+        iv: iv.toString('hex'),
+        encrypted,
+    };
 
-    // Run encryption steps
-    !options.silent && process.stdout.write("Encrypting source...")
-    const sourceRef = readFile(source, null, false)
-    const parts = sourceRef.toString().split('\n')
-    const builder = []
-    parts.forEach(part => builder.push(cipher.update(part, 'binary', 'hex')))
-    builder.push(cipher.final('hex'))
-    const result = builder.join(delimiter)
-    const encodedString = btoa(result);
-    writeFile(destination, encodedString, true, false)
-    !options.silent && process.stdout.write("done!\n")
-
+    writeFile(destination, btoa(JSON.stringify(dataToStore)), true, false);
 }
+
 
 /**
  * Decrypt
@@ -88,30 +81,21 @@ function Encrypt(source, destination, privateKey, options = { silent: true }) {
  * @param {object} options // options = { silent: true }  
  */
 function Decrypt(source, destination, privateKey, options = { silent: false }) {
+    const crypto = getCryptography();
 
-    if (!source || !destination || !privateKey) {
-        throw new Error(`Missing required values${!source ? ", a source" : ""}${!destination ? ", a destination" : ""}${!privateKey ? ", a private key" : ""}`)
-    }
+    const sourceRef = readFile(source, null, false);
+    const { iv, encrypted } = JSON.parse(atob(sourceRef.toString()));
 
-    const crypto = getCryptography()
+    const key = crypto.createHash(hashAlgo).update(privateKey).digest();
+    const decipher = crypto.createDecipheriv(cipherIVAlgo, key, Buffer.from(iv, 'hex'));
 
-    // Create buffer for storage with initializing vector
-    const resizeIV = Buffer.allocUnsafe(16)
-    const key = crypto.createHash(hashAlgo).update(privateKey).digest()
-    const decipher = crypto.createDecipheriv(cipherIVAlgo, key, resizeIV)
+    const decrypted = decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8');
 
-    // Run decryption steps
-    !options.silent && process.stdout.write("Decrypting source...", false)
-    const sourceRef = readFile(source, null, false)
-    const decodedString = atob(sourceRef.toString());
-    const parts = decodedString.split(delimiter)
-    const builder = []
-    parts.forEach(part => builder.push(decipher.update(part, 'hex', 'binary')))
-    builder.push(decipher.final('binary'))
-    const result = builder.join('')
-    writeFile(destination, result, true, false)
-    !options.silent && process.stdout.write("done!\n")
+    writeFile(destination, decrypted, true, false);
 }
+
+
+
 
 module.exports = {
     Decrypt,
