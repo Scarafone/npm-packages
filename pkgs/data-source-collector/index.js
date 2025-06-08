@@ -1,1 +1,1 @@
-module.exports = { getDataFromSources, postDataToSources } = require('./DataSourceCollector/data-source-collector')
+module.exports = { deleteDataFromSources, getDataFromSources, patchDataToSources, postDataToSources } = require('./DataSourceCollector/data-source-collector')
